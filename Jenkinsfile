@@ -13,7 +13,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out source code...'
-                git 'https://github.com/KastroVKiran/microservices-ingress.git'
+                git 'git https://github.com/Prince-lathiya/microservices-ingress-kastro.git'
             }
         }
 
