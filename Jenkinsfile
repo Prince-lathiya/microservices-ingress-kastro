@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_HUB_REPO = 'kastrov/techsolutions-app'
-        K8S_CLUSTER_NAME = 'kastro-cluster'
+        K8S_CLUSTER_NAME = 'prince-cluster'
         AWS_REGION = 'us-east-1'
         NAMESPACE = 'default'
         APP_NAME = 'techsolutions'
