@@ -13,7 +13,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out source code...'
-                git 'git https://github.com/Prince-lathiya/microservices-ingress-kastro.git'
+                git 'https://github.com/Prince-lathiya/microservices-ingress-kastro.git' 
             }
         }
 
@@ -124,30 +124,5 @@ pipeline {
                         echo "- Contact Page: ${env.INGRESS_URL}/contact"
                         echo "========================================="
 
+                        // Health checks for the deployed pages
                         sh "curl -I ${env.INGRESS_URL}/ || echo 'Home page check failed'"
-                        sh "curl -I ${env.INGRESS_URL}/about || echo 'About page check failed'"
-                        sh "curl -I ${env.INGRESS_URL}/services || echo 'Services page check failed'"
-                        sh "curl -I ${env.INGRESS_URL}/contact || echo 'Contact page check failed'"
-                    }
-                }
-            }
-        }
-    }
-
-    post {
-        always {
-            echo 'Cleaning up Docker images...'
-            sh "docker rmi ${DOCKER_HUB_REPO}:${env.IMAGE_TAG} || true"
-            sh "docker rmi ${DOCKER_HUB_REPO}:latest || true"
-        }
-
-        success {
-            echo 'Pipeline completed successfully!'
-            echo "Access your application at: ${env.INGRESS_URL}"
-        }
-
-        failure {
-            echo 'Pipeline failed! Please check the logs.'
-        }
-    }
-}
